@@ -1,0 +1,46 @@
+<html>
+<head>
+<style type="text/css">
+#boxA, #boxB{
+float:left;
+padding:10px;
+margin:10px;
+-moz user-select:none;
+}
+#boxA{background-color:#6633FF; width:75px;
+height:75px;
+}
+#boxB{background-color:#FF6699; width:150px; height:150px;}
+</style>
+<script type="text/javascript">
+function dragstar(ev){
+ev.dataTransfer.effectAllowed='move';
+ev.dataTransfer.setData("text", ev.target.getAttribute('id'));
+ev.dataTransfer.setDragImage(ev.target,0,0);
+return true;
+}
+function dragEnter(ev){
+event.preventDefault();
+return true;
+}
+function dragOver(ev){
+return false;
+}
+function dragDrop(ev){
+var src=ev.dataTransfer.getData('text');
+ev.target.appendChild(document.getElementById(src));
+ev.stopPropagation();
+return false;
+}
+</script>
+<body bgcolor="#777777">
+<center>
+<h2>Drag & Drop Your File Here</h2>
+<div>Try To Move Virus Box Into Dustbin.</div>
+<div id="boxA" draggable="true" ondragstart="return dragStart(event)">
+<p>Virus</p>
+</div>
+<div id="boxB" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">DUSTBIN</div>
+</center>
+</body>
+</html>
